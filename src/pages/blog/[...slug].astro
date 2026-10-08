@@ -22,7 +22,7 @@ const { title, description, pubDate, updatedDate, draft } = post.data;
         {updatedDate && <> · aktualizováno <FormattedDate date={updatedDate} /></>}
         {draft && <strong class="draft"> · KONCEPT</strong>}
       </p>
-      <h1>{title}</h1>
+      <h1 transition:name={`post-title-${post.id}`}>{title}</h1>
       <p class="lead">{description}</p>
     </header>
     <div class="prose">

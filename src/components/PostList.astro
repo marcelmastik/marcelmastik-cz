@@ -10,10 +10,10 @@ const { posts } = Astro.props;
 
 <ul class="posts">
   {posts.map((post) => (
-    <li>
+    <li class="card">
       <a href={`/blog/${post.id}/`}>
         <span class="date"><FormattedDate date={post.data.pubDate} /></span>
-        <span class="title">{post.data.title}</span>
+        <span class="title" transition:name={`post-title-${post.id}`}>{post.data.title}</span>
         <span class="desc">{post.data.description}</span>
       </a>
     </li>
@@ -21,11 +21,12 @@ const { posts } = Astro.props;
 </ul>
 
 <style>
-  .posts { list-style: none; padding: 0; margin: 0; }
-  li { border-bottom: 1px solid var(--border); }
+  .posts { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+  li { transition: transform 0.2s, border-color 0.2s; }
+  li:hover { transform: translateY(-2px); border-color: var(--accent); }
   a {
     display: block;
-    padding: 1.25rem 0;
+    padding: 1.25rem 1.5rem;
     color: var(--text);
     text-decoration: none;
   }

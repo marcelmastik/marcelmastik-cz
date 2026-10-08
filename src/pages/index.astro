@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostList from '../components/PostList.astro';
+import HandUnderline from '../components/HandUnderline.astro';
 import { getPosts } from '../utils';
 
 const posts = (await getPosts()).slice(0, 3);
@@ -10,9 +11,10 @@ const posts = (await getPosts()).slice(0, 3);
   <section class="hero">
     <span class="accent-bar"></span>
     <h1>Ahoj, jsem Marcel.</h1>
+    <!-- TODO: napiš 1–2 věty o sobě; klíčovou frázi obal do <HandUnderline> -->
     <p class="lead">
-      <!-- TODO: napiš 1–2 věty o sobě -->
-      Píšu o své práci, projektech a věcech, které mě během ní naučily něco nového.
+      Píšu o své práci, projektech a věcech, které mě
+      <HandUnderline>naučily něco nového</HandUnderline>.
     </p>
     <p class="cta">
       <a class="button" href="/o-mne/">Více o mně</a>
@@ -29,15 +31,17 @@ const posts = (await getPosts()).slice(0, 3);
 
 <style>
   .hero { padding: 4rem 0 1rem; }
-  .lead { font-size: 1.25rem; color: var(--muted); max-width: 36rem; }
+  .lead { font-size: 1.3rem; color: var(--muted); max-width: 36rem; line-height: 1.8; }
+  .lead :global(.hand-underline) { color: var(--text); }
   .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; margin-top: 2rem; }
   .button {
     background: var(--accent);
-    color: var(--bg);
+    color: #fff;
     padding: 0.6rem 1.2rem;
     border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
+    transition: background-color 0.2s;
   }
-  .button:hover { background: var(--accent-dark); color: var(--bg); }
+  .button:hover { background: var(--accent-dark); color: #fff; }
 </style>

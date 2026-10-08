@@ -16,7 +16,7 @@ const rendered = await Promise.all(
   </section>
 
   {rendered.map(({ data, Content }) => (
-    <article class="project">
+    <article class="project card">
       <p class="meta">{data.company} · {data.period}</p>
       <h2>{data.title}</h2>
       <p class="role">{data.role}</p>
@@ -30,9 +30,9 @@ const rendered = await Promise.all(
 <style>
   .page-head { padding-top: 3rem; }
   .project {
-    border-left: 3px solid var(--accent);
-    padding: 0.25rem 0 0.25rem 1.25rem;
-    margin: 2.5rem 0;
+    border-top: 3px solid var(--accent);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
   }
   .project h2 { margin: 0.1rem 0 0.25rem; }
   .meta { margin: 0; font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }

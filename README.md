@@ -1,6 +1,6 @@
 # marcelmastik-cz
 
-Můj osobní web a blog. Postavený na [Astro](https://astro.build), nasazený na Vercelu.
+Můj osobní web a blog. Postavený na [Astro](https://astro.build). Hosting: Vercel nebo Cloudflare Pages (zatím nerozhodnuto).
 
 ## Jak napsat článek
 
@@ -24,7 +24,8 @@ Můj osobní web a blog. Postavený na [Astro](https://astro.build), nasazený n
 | Úvodní stránka | `src/pages/index.astro` |
 | O mně + CV | `src/pages/o-mne.astro` |
 | Projekty | `src/content/projekty/*.md` |
-| Barvy a písma | `src/styles/global.css` (proměnné nahoře) |
+| Barvy, písma, textura | `src/styles/global.css` (proměnné nahoře) |
+| Podtržená fráze v hero | `<HandUnderline>` v `src/pages/index.astro` |
 | Fotka / CV v PDF | `public/foto.jpg`, `public/cv.pdf` |
 
 ## Lokální spuštění
