@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { getPosts } from '../../utils';
+
+const posts = await getPosts();
+---
+
+<BaseLayout title="Blog" description="Všechny články z blogu.">
+  <section class="page-head">
+    <span class="accent-bar"></span>
+    <h1>Blog</h1>
+  </section>
+  <PostList posts={posts} />
+</BaseLayout>
+
+<style>
+  .page-head { padding-top: 3rem; }
+</style>

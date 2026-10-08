@@ -1,0 +1,55 @@
+---
+import { SITE_TITLE } from '../consts';
+
+const nav = [
+  { href: '/blog/', label: 'Blog' },
+  { href: '/projekty/', label: 'Projekty' },
+  { href: '/o-mne/', label: 'O mně' },
+];
+const path = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container inner">
+    <a class="logo" href="/">{SITE_TITLE}<span>.</span></a>
+    <nav>
+      {nav.map((item) => (
+        <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header { border-bottom: 1px solid var(--border); }
+  .inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+  .logo {
+    font-family: var(--font-head);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  nav { display: flex; gap: 1.25rem; }
+  nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+  }
+  nav a:hover, nav a[aria-current='page'] {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+</style>

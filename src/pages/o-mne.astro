@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { EMAIL, SOCIAL } from '../consts';
+
+// TODO: nahraď ukázková data svým skutečným CV
+const experience = [
+  {
+    period: '2022 – dosud',
+    role: 'Pozice',
+    company: 'Firma',
+    text: 'Stručný popis toho, co máš na starosti a čeho jsi dosáhl.',
+  },
+  {
+    period: '2018 – 2022',
+    role: 'Pozice',
+    company: 'Předchozí firma',
+    text: 'Stručný popis role a hlavních výsledků.',
+  },
+];
+
+const education = [{ period: '2013 – 2018', title: 'Obor', school: 'Škola' }];
+
+const skills = ['Dovednost 1', 'Dovednost 2', 'Dovednost 3', 'Nástroj 1', 'Nástroj 2'];
+---
+
+<BaseLayout title="O mně" description="Kdo jsem, co dělám a moje profesní CV.">
+  <section class="page-head">
+    <span class="accent-bar"></span>
+    <h1>O mně</h1>
+    <!-- TODO: fotku ulož do public/foto.jpg a odkomentuj -->
+    <!-- <img class="photo" src="/foto.jpg" alt="Marcel Mastík" width="160" height="160" /> -->
+    <p class="lead">
+      Krátké představení: kdo jsi, čemu se věnuješ a co tě baví. Dva až tři odstavce úplně stačí.
+    </p>
+    <p>
+      Ozvat se mi můžeš na <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      {SOCIAL.map((s) => <> · <a href={s.href} rel="me noopener" target="_blank">{s.label}</a></>)}.
+    </p>
+  </section>
+
+  <h2>Pracovní zkušenosti</h2>
+  <ol class="timeline">
+    {experience.map((e) => (
+      <li>
+        <span class="period">{e.period}</span>
+        <div>
+          <h3>{e.role} <span class="muted">· {e.company}</span></h3>
+          <p>{e.text}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+
+  <h2>Vzdělání</h2>
+  <ol class="timeline">
+    {education.map((e) => (
+      <li>
+        <span class="period">{e.period}</span>
+        <div><h3>{e.title} <span class="muted">· {e.school}</span></h3></div>
+      </li>
+    ))}
+  </ol>
+
+  <h2>Dovednosti</h2>
+  <div>{skills.map((s) => <span class="tag">{s}</span>)}</div>
+
+  <!-- TODO: CV v PDF ulož do public/cv.pdf a odkomentuj -->
+  <!-- <p><a href="/cv.pdf">Stáhnout CV (PDF)</a></p> -->
+</BaseLayout>
+
+<style>
+  .page-head { padding-top: 3rem; }
+  .lead { font-size: 1.2rem; }
+  .photo { border-radius: 50%; border: 3px solid var(--accent); margin-bottom: 1rem; }
+  .timeline { list-style: none; padding: 0; margin: 0; }
+  .timeline li {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .timeline h3 { margin: 0 0 0.25rem; }
+  .timeline p { margin: 0; }
+  .period { color: var(--accent); font-weight: 600; font-size: 0.9rem; padding-top: 0.2rem; }
+  @media (max-width: 520px) {
+    .timeline li { grid-template-columns: 1fr; gap: 0.25rem; }
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+import { getPosts } from '../utils';
+
+const posts = (await getPosts()).slice(0, 3);
+---
+
+<BaseLayout>
+  <section class="hero">
+    <span class="accent-bar"></span>
+    <h1>Ahoj, jsem Marcel.</h1>
+    <p class="lead">
+      <!-- TODO: napiš 1–2 věty o sobě -->
+      Píšu o své práci, projektech a věcech, které mě během ní naučily něco nového.
+    </p>
+    <p class="cta">
+      <a class="button" href="/o-mne/">Více o mně</a>
+      <a href="/projekty/">Projekty →</a>
+    </p>
+  </section>
+
+  <section>
+    <h2>Nejnovější články</h2>
+    {posts.length > 0 ? <PostList posts={posts} /> : <p class="muted">Zatím tu nic není.</p>}
+    <p><a href="/blog/">Všechny články →</a></p>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { padding: 4rem 0 1rem; }
+  .lead { font-size: 1.25rem; color: var(--muted); max-width: 36rem; }
+  .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; margin-top: 2rem; }
+  .button {
+    background: var(--accent);
+    color: var(--bg);
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .button:hover { background: var(--accent-dark); color: var(--bg); }
+</style>

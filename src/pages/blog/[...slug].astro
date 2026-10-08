@@ -1,0 +1,41 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { getPosts } from '../../utils';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, description, pubDate, updatedDate, draft } = post.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <article>
+    <header>
+      <p class="meta">
+        <FormattedDate date={pubDate} />
+        {updatedDate && <> · aktualizováno <FormattedDate date={updatedDate} /></>}
+        {draft && <strong class="draft"> · KONCEPT</strong>}
+      </p>
+      <h1>{title}</h1>
+      <p class="lead">{description}</p>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+  <hr />
+  <p><a href="/blog/">← Zpět na blog</a></p>
+</BaseLayout>
+
+<style>
+  article header { padding-top: 3rem; margin-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  .meta { color: var(--muted); font-size: 0.9rem; margin: 0 0 0.5rem; }
+  .draft { color: var(--accent); }
+  .lead { font-size: 1.2rem; color: var(--muted); }
+</style>
